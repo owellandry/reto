@@ -7,8 +7,8 @@ h1{
 }
 
 body{
-    background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v500-ning-17-retrofuturism_1.jpg?bg=transparent&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-3.1.0&q=65&usm=15&vib=3&w=1200&s=2da14495aab1ff4c9784f9bd4c6d2ef1");
-}
+    background-image: url("./img/442432.jpg");
+} 
 
 .title{
     color: white;
@@ -36,31 +36,31 @@ div#contenedor > div {
 }
 
 #torre_1 {
-    width: 60px;
+    width: 30px;
     height: 25px;
     background-color: #289DFF 
 }
 
 #torre_2 {
-    width: 120px;
+    width: 60px;
     height: 25px;
     background-color:#FF3228  
 }
 
 #torre_3 {
-    width: 180px;
+    width: 90px;
     height: 25px;
     background-color: #F8FF28 
 }
 
 #torre_4 {
-    width: 60px;
+    width: 120px;
     height: 25px;
     background-color: #289DFF 
 }
 
 #torre_5 {
-    width: 120px;
+    width: 150px;
     height: 25px;
     background-color:#FF3228  
 }

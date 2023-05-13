@@ -132,7 +132,8 @@ function cortaCompa(primero, segundo) {
         salida = true;
     } else {
         var salida = ( segundo.split("_")[1] < primero[0].id.split("_")[1] ) ? true: false;
-    }
+      }
+      console.log(contador);
     return salida;
 }
 window.addEventListener("load", main, false);
