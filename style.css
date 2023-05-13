@@ -30,20 +30,29 @@ div#contenedor > div {
     align-items: center;
 }
 
-div#torre_1 {
+.text-win{
+    text-align: center;
+    color: white;
+}
+
+#torre_1 {
     width: 60px;
     height: 25px;
     background-color: #289DFF 
 }
 
-div#torre_2 {
+#torre_2 {
     width: 120px;
     height: 25px;
     background-color:#FF3228  
 }
 
-div#torre_3 {
+#torre_3 {
     width: 180px;
     height: 25px;
     background-color: #F8FF28 
+}
+
+.credit{
+    color: white;
 }

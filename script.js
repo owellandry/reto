@@ -1,101 +1,75 @@
-var objetos = {
+const objetos = {
     "a": ["torre_1", "torre_2", "torre_3"]
-}
-var torresTotales = 3;
-var contador = 0;
-// Funcion iniciadora
-function main() {
+  };
+  const torresTotales = 3;
+  
+  let contador = 0;
+  
+  function main() {
     pintar("a");
     inicio();
-}
-
-// inicio del juego
-function inicio() {
-    console.log("Juego cargardo");
-    var torres = document.querySelectorAll("div#contenedor > div > div");
-    var soltar = document.querySelectorAll("div#contenedor > div");
-
-// Handles de agarrado
-    for(var i = 0; i < torres.length; i++) {
-        torres[i].addEventListener("dragstart", arrastradoInicial, false);
-        torres[i].addEventListener("dragend", finalizado, false);
+  }
+  
+  function inicio() {
+    console.log("Juego cargado");
+    const torres = document.querySelectorAll("div#contenedor > div > div");
+    const soltar = document.querySelectorAll("div#contenedor > div");
+    for(const torre of torres) {
+      torre.addEventListener("dragstart", arrastradoInicial);
+      torre.addEventListener("dragend", finalizado);
     }
-    
-// Handles de soltado
-    for(var i = 0; i < soltar.length; i++) {
-        soltar[i].addEventListener("dragenter", (e)=>e.preventDefault(), false);
-        soltar[i].addEventListener("dragover", (e)=>e.preventDefault(), false);
-        soltar[i].addEventListener("drop", dropFinal, false);
+    for(const destino of soltar) {
+      destino.addEventListener("dragenter", e => e.preventDefault());
+      destino.addEventListener("dragover", e => e.preventDefault());
+      destino.addEventListener("drop", dropFinal);
     }
-    
-}
-
-/* Funciones de arrastrar y soltar */
-// Arrastrado
-function arrastradoInicial(e) {
-    var padre = e.target.parentNode;
+  }
+  
+  function arrastradoInicial(e) {
+    const padre = e.target.parentNode;
     if(padre.childNodes[0].id === e.target.id) {
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData("Text", e.target.id);        
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData("Text", e.target.id);
     }
-
-}
-function finalizado(e) {
+  }
+  
+  function finalizado(e) {
     e.preventDefault();
-    var final = document.getElementById("c");
-    var ganar = document.querySelector("div#salida > div");
+    const final = document.getElementById("c");
+    const ganar = document.querySelector("div#salida > div");
     if(final.childNodes.length === torresTotales) {
-        ganar.innerHTML = "HAS GANADO UN PREMIO :)";
+      ganar.innerHTML = "HAS GANADO UN PREMIO :)";
     }
-}
-
-//Soltado
-
-function dropFinal(e) {
-    // Es la caja donde caen los discos
+  }
+  
+  function dropFinal(e) {
     e.preventDefault();
-    var puntero = e.target;
-    var padre = document.getElementById(puntero.id).childNodes;   
-    // es el id que recibe
-    var item = e.dataTransfer.getData("Text");
-
-    // Comparar la posicion de las piezas
-    var puedoPoner = cortaCompa(padre, item);
-
-    if(puntero.id != "torre_1" && puntero.id != "torre_2" && puntero.id != "torre_3" && item != '' &&  puedoPoner) {
-        
-        var quitar = document.getElementById(item);
-        quitar.parentNode.removeChild(quitar);
-        puntero.innerHTML = '<div id="'+item+'" draggable="true"></div>' + puntero.innerHTML;
-        contador++;
+    const destino = e.target;
+    if(!destino.id.startsWith("torre_")) return; // Si no es una torre, no hacer nada
+  
+    const piezas = Array.from(destino.children).map(child => parseInt(child.id.split("_")[1]));
+    const item = e.dataTransfer.getData("Text");
+    const numItem = parseInt(item.split("_")[1]);
+    if(isNaN(numItem)) return; // Si el id del item no tiene formato válido, no hacer nada
+  
+    if(piezas.length === 0 || numItem < piezas[0]) {
+      const itemElement = document.getElementById(item);
+      itemElement.parentNode.removeChild(itemElement);
+      destino.prepend(itemElement);
+      contador++;
     }
   
-    var sal = document.querySelector("div#salida span");
+    const sal = document.querySelector("div#salida span");
     sal.innerHTML = contador;
-    inicio();
-}
-// Pintador
-function pintar(p) {
-    var cajas = document.getElementById(p);
+  }
+  
+  function pintar(p) {
+    const cajas = document.getElementById(p);
     cajas.innerHTML = '';
-    for(var i = 0; i < objetos[p].length; i++) {
-        cajas.innerHTML += '<div id="'+objetos[p][i]+'" draggable="true"></div>';
+    for(const torre of objetos[p]) {
+      cajas.innerHTML += `<div id="${torre}" draggable="true"></div>`;
     }
-    
-}
-
-// Funciones de ayuda
-
-// Funcion para cortar y comparar quien es el mayor devolverá true solo si se puede poner el elemento de lo contrario será false
-// @param primero - Array
-// @Param segundo - string
-function cortaCompa(primero, segundo) {
-    if(primero[0] == undefined) {
-        salida = true;
-    } else {
-        var salida = ( segundo.split("_")[1] < primero[0].id.split("_")[1] ) ? true: false;
-    }
-    return salida;
-}
-// setTimeout(main, 2000);
-window.addEventListener("load", main, false);
+  }
+  
+  window.addEventListener("load", main);
+  
