@@ -93,3 +93,10 @@ div#contenedor > div {
 .credit{
     color: white;
 }
+
+#cronometro {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
