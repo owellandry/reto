@@ -96,24 +96,38 @@ function pintar(p) {
       }
       function dropFinal(e) {
         e.preventDefault();
-        const destino = e.target;
-        if(!destino.id.startsWith("torre_")) return;
+        var puntero = e.target;
+        var padre = document.getElementById(puntero.id).childNodes;   
+        var item = e.dataTransfer.getData("Text");
+        var puedoPoner = cortaCompa(padre, item);
+        
+        if (puntero.id != "torre_1" && puntero.id != "torre_2" && puntero.id != "torre_3" && item != '' && puedoPoner) {
+          // Si la torre de destino tiene bloques
+          if (padre.length > 0) {
+            // Obtenemos el tamaño del bloque que se va a mover y el de la cima de la torre de destino
+            var tamanoBloque = parseInt(item.split('_')[1]);
+            var tamanoBloqueDestino = parseInt(padre[0].id.split('_')[1]);
       
-        const piezas = Array.from(destino.children).map(child => parseInt(child.id.split("_")[1]));
-        const item = e.dataTransfer.getData("Text");
-        const numItem = parseInt(item.split("_")[1]);
-        if(isNaN(numItem)) return;
+            // Si el bloque que se va a mover es más grande que el que se encuentra en la cima de la torre de destino, reiniciamos la partida
+            if (tamanoBloque > tamanoBloqueDestino) {
+              alert('Has movido un bloque grande encima de uno pequeño. La partida se reiniciará');
+              location.reload();
+              return;
+            }
+          }
       
-        if(piezas.length === 0 || numItem < piezas[0]) {
-          const itemElement = document.getElementById(item);
-          itemElement.parentNode.removeChild(itemElement);
-          destino.prepend(itemElement);
+          // Movemos el bloque normalmente si todo está correcto
+          var quitar = document.getElementById(item);
+          quitar.parentNode.removeChild(quitar);
+          puntero.innerHTML = '<div id="'+item+'" draggable="true"></div>' + puntero.innerHTML;
           contador++;
         }
-      
-        const sal = document.querySelector("#salida span");
+        
+        var sal = document.querySelector("div#salida span");
         sal.innerHTML = contador;
+        inicio();
       }
+        
       function pintar(p) {
         const cajas = document.getElementById(p);
         cajas.innerHTML = '';

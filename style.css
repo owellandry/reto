@@ -28,6 +28,8 @@ div#contenedor > div {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    border-radius: 15px;
+    background-color: rgba(206, 206, 206, 0.514);
 }
 
 .text-win{
@@ -36,36 +38,54 @@ div#contenedor > div {
 }
 
 #torre_1 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 30px;
     height: 25px;
     background-color: #289DFF 
 }
 
 #torre_2 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 60px;
     height: 25px;
     background-color:#FF3228  
 }
 
 #torre_3 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 90px;
     height: 25px;
     background-color: #F8FF28 
 }
 
 #torre_4 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 120px;
     height: 25px;
     background-color: #289DFF 
 }
 
 #torre_5 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 150px;
     height: 25px;
     background-color:#FF3228  
 }
 
 #torre_6 {
+    margin: 2px;
+    padding: 1px;
+    border-radius: 10px;
     width: 180px;
     height: 25px;
     background-color: #F8FF28 
