@@ -100,3 +100,17 @@ body{
     margin-top: 20px;
   }
   
+  .time{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+  }
+
+  #start-btn{
+    border-radius: 15px;
+    border: none;
+    padding: 20px;
+    font-size: 15px;
+  }
