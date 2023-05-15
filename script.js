@@ -138,10 +138,6 @@ function cortaCompa(primero, segundo) {
 }
 window.addEventListener("load", main, false);
 
-
-
-
-
 // Variables globales
 let cronometro = document.getElementById('cronometro');
 let startBtn = document.getElementById('start-btn');
